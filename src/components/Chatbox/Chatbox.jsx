@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useRef, useEffect }  from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Chatbox = ({ messages }) => {
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="space-y-3 flex flex-col px-5">
       {messages.map((message, index) => (
@@ -32,6 +38,7 @@ const Chatbox = ({ messages }) => {
           </ReactMarkdown>
         </div>
       ))}
+      <div ref={chatEndRef} />
     </div>
   );
 };

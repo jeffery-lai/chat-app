@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import icon from "../../assets/send.png";
 
-const Inputbox = ({ onSendMessage }) => {
+const Inputbox = ({ onSendMessage  }) => {
   const [inputValue, setInputValue] = useState("");
   const textareaRef = useRef(null);
 
