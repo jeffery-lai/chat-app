@@ -5,14 +5,25 @@ import Inputbox from "./components/Inputbox/Inputbox";
 function App() {
   const [messages, setMessages] = useState([]);
 
-  const handleSendMessage = (message) => {
+  const handleSendMessage = async (message) => {
     setMessages([...messages, { text: message, sender: "user" }]);
-
-    // Simulated system response
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { text: "This is a system response.", sender: "system" }]);
-    }, 1000);
+  
+    try {
+      const response = await fetch("http://127.0.0.1:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+  
+      const data = await response.json();
+      if (data.response) {
+        setMessages((prev) => [...prev, { text: data.response, sender: "system" }]);
+      }
+    } catch (error) {
+      console.error("Error fetching response:", error);
+    }
   };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-900 text-white">
@@ -29,6 +40,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

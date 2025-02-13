@@ -36,7 +36,7 @@ const Inputbox = ({ onSendMessage }) => {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Type a message..."
           rows={1}
-          className="flex-1 px-5 py-3 bg-neutral-700 rounded-3xl resize-none overscroll-contain min-h-12 max-h-40 outline-none"
+          className="flex-1 px-5 py-3 bg-neutral-700 rounded-3xl resize-none overscroll-contain min-h-12 max-h-40 outline-none no-scrollbar"
           onKeyDown={handleEnter}
         />
         <button
