@@ -1,5 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Chatbox = ({ messages }) => {
   return (
@@ -13,7 +15,21 @@ const Chatbox = ({ messages }) => {
               : "bg-neutral-700 self-start"
           }`}
         >
-          <ReactMarkdown>{message.text}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                return inline ? (
+                  <code className="bg-gray-700 px-1 py-0.5 rounded">{children}</code>
+                ) : (
+                  <SyntaxHighlighter style={atomDark} language="javascript" {...props}>
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                );
+              },
+            }}
+          >
+            {message.text}
+          </ReactMarkdown>
         </div>
       ))}
     </div>
