@@ -1,22 +1,15 @@
-import React, { useState, useRef, useEffect }  from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Chatbox = ({ messages }) => {
-  const chatEndRef = useRef(null);
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
     <div className="space-y-3 flex flex-col px-5">
       {messages.map((message, index) => (
         <div
           key={index}
           className={`max-w-[75%] break-words whitespace-pre-wrap overflow-x-auto px-4 py-2 no-scrollbar rounded-2xl ${
-            message.sender === "user"
+            message.role === "user"
               ? "bg-blue-500 self-end"
               : "bg-neutral-700 self-start"
           }`}
@@ -34,11 +27,10 @@ const Chatbox = ({ messages }) => {
               },
             }}
           >
-            {message.text}
+            {message.content}
           </ReactMarkdown>
         </div>
       ))}
-      <div ref={chatEndRef} />
     </div>
   );
 };

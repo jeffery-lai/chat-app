@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import icon from "../../assets/send.png";
 
-const Inputbox = ({ onSendMessage  }) => {
+const Inputbox = ({ onSendMessage, isTyping  }) => {
   const [inputValue, setInputValue] = useState("");
   const textareaRef = useRef(null);
 
@@ -38,10 +38,12 @@ const Inputbox = ({ onSendMessage  }) => {
           rows={1}
           className="flex-1 px-5 py-3 bg-neutral-700 rounded-3xl resize-none overscroll-contain min-h-12 max-h-40 outline-none no-scrollbar"
           onKeyDown={handleEnter}
+          disabled={isTyping}
         />
         <button
           onClick={handleSend}
-          className="ml-2 px-6 py-3 bg-blue-500 rounded-3xl hover:bg-blue-600 transition">
+          className="ml-2 px-6 py-3 bg-blue-500 rounded-3xl hover:bg-blue-600 transition"
+          disabled={isTyping}>
           <img src={icon} alt="Send" width="30" height="30" />
         </button>
       </div>
