@@ -1,8 +1,23 @@
-# React + Vite
+# Chat App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Run a simple LLM-powered chat interface on your own machine!
 
-Currently, two official plugins are available:
+## Getting Started
+To start the app, run the following commands at the project root:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+docker compose up -d
+```
+```
+./setup_model.sh
+```
+This will pull and set up the Llama 3.2 model from Ollama automatically.
+
+## Using a Different Model
+If you would like to use a different model:
+
+ 1. Modify the default model in:
+   * `/model/model.py`
+   * `setup_model.sh`
+ 1. Remove any old Docker images
+ 1. Rebuild the containers using the original steps
