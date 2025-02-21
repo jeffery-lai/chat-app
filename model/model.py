@@ -3,8 +3,7 @@ from flask_cors import CORS
 import ollama
 
 app = Flask(__name__)
-CORS(app)  # Allows frontend to communicate with backend
-
+CORS(app)
 OLLAMA_MODEL = "llama3.2"
 
 def generate_response(prompt):
@@ -16,9 +15,13 @@ def generate_response(prompt):
 def chat():
     """ Receives user input and returns AI-generated response. """
     data = request.json
+    if not data or "messages" not in data:
+        return {"error": "Invalid request. 'messages' key required"}, 400
+    
     messages = data.get("messages", [])
 
-    return Response(generate_response(messages), content_type="text/plain")
+    response = Response(generate_response(messages), content_type="text/plain")
+    return response
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
