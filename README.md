@@ -12,6 +12,7 @@ docker compose up -d
 ./setup_model.sh
 ```
 This will pull and set up the Llama 3.2 model from Ollama automatically.
+You can now access the app at `http://localhost/:80`
 
 ## Using a Different Model
 If you would like to use a different model:
